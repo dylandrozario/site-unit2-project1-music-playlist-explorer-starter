@@ -55,20 +55,26 @@ const playlists = [
 
 **Visual system**
 
-- Background `#121212`, card surface `#181818`, hover surface `#282828`.
-- Text `#ffffff`, muted text `#b3b3b3`. Accent `#1DB954` (Spotify green).
+- Background `#000000` (pure black), main content area `#0a0a0a` (very dark gray), card surface `#1a1a1a`, hover surface `#242424`.
+- Text `#ffffff`, muted text `#b3b3b3`, tertiary text `#888888` (for album names). 
+- Header/Footer `#17a34a` (darker green), header text `#e0e0e0` (light grey).
+- Modal background `#1a1a1a`, song items `#2a2a2a`, song items hover `#333333`.
 - Card radius `12px`, grid gap `24px`, modal shadow `0 8px 24px rgba(0,0,0,0.5)`.
+- Main content area has `border-radius: 12px` for visual separation.
+- Header/Footer shadows `0 2px 8px rgba(0,0,0,0.4)`.
+- Like heart color: `#e74c3c` (red) for hover and liked state.
+- Song list gap: `8px` vertical spacing between items for better visibility.
 
 **Layout**
 
-- Sticky slim header: wordmark (left), nav links `All Playlists` · `Featured` and a search bar (right). The active nav link shows an accent-colored underline.
-- Playlist grid should have at least 6 tiles fit on a laptop at full screen and reflow responsively without media queries.
+- Sticky header with green background: wordmark (left), nav links `All Playlists` · `Featured` and a search bar (right). The active nav link shows a white underline. Header has drop shadow for depth.
+- Playlist grid displays exactly 4 cards per row using `grid-template-columns: repeat(4, 1fr)`.
 
 **Interaction rules**
 
 1. **Render on load** — On page load, `renderPlaylists()` reads the playlist data array and builds one tile per playlist into the grid. Each tile shows the cover image, playlist name (bold), author (muted), and a footer row with a heart icon and like count.
 2. **Open details modal** — Clicking a tile anywhere *except the heart* opens a centered modal populated with the playlist's cover, name, author, and song list (title · artist · duration). The backdrop darkens to `rgba(0,0,0,0.6)` with a blur and page scroll is locked. The modal closes on backdrop click, the ✕ button, or the `Esc` key.
-3. **Like toggle** — Clicking the heart toggles only that playlist's liked state and make sure the modal does not open. Unliked → liked: like count `+1` and the heart fills with the accent color. Liked → unliked: like count `-1` and the heart returns to its outline state. Liked state is held on the playlist object in memory.
+3. **Like toggle** — Clicking the heart toggles only that playlist's liked state and make sure the modal does not open. Unliked → liked: like count `+1` and the heart fills with red (`#e74c3c`). Liked → unliked: like count `-1` and the heart returns to its outline state (muted gray). Liked state is held on the playlist object in memory.
 4. **Shuffle songs** — A shuffle button in the detail modal reorders that playlist's song array and re-renders the song list so the order visibly differs from the previous render.
 5. **Navigation** — Header links switch between the All Playlists view and the Featured page without using the browser's back/forward buttons.
 
