@@ -1,11 +1,59 @@
 ## Music Playlist Explorer — Planning Spec
 
 ### Data Shape
-[Leave blank — fill in before Milestone 3]
+
+```js
+const playlists = [
+  {
+    id:              // Unique identifier for the playlist
+    playlistName:     // Bold title shown on card and modal
+    playlistAuthor:    // Muted text shown below title
+    playlistCoverUrl:  // Cover image for card and modal
+    likeCount:                       // Number displayed next to heart icon
+    isLiked:                       // Boolean for liked state (fills heart when true)
+    songs: [
+      {
+        title:            // Song title in modal song list
+        artist:             // Artist name in modal song list
+        duration:                  // Duration in modal song list (mm:ss format)
+      },
+      // ... more songs
+    ]
+  },
+  // ... more playlists
+];
+```
+
+**Element and class naming conventions:**
+
+- **Playlist card**: `.playlist-card` container
+  - `.playlist-card-cover` — cover image
+  - `.playlist-card-name` — playlist name (bold)
+  - `.playlist-card-author` — author (muted)
+  - `.playlist-card-footer` — footer row containing heart and like count
+  - `.playlist-card-heart` — heart icon (add `.playlist-card__heart--liked` when isLiked is true)
+  - `.playlist-card-like-count` — like count number
+
+- **Modal**: `.modal` container (hidden by default, add `.modal--open` to show)
+  - `.modal-backdrop` — darkened backdrop with blur
+  - `.modal-content` — centered content box
+  - `.modal-close` — ✕ close button
+  - `.modal-cover` — large cover image
+  - `.modal-name` — playlist name
+  - `.modal-author` — author name
+  - `.modal-song-list` — container for songs
+  - `.modal-song-item` — individual song row
+  - `.modal-shuffle-btn` — shuffle button
+
+- **Header**: `.header` (sticky)
+  - `.header-wordmark` — wordmark/logo
+  - `.header-nav` — navigation links container
+  - `.header-nav-link` — individual nav links (add `.header__nav-link--active` for active state)
+  - `.header-search` — search bar
 
 ### UI and Interaction Rules
 
-**Visual system (Option A — "Spotify Dark")**
+**Visual system**
 
 - Background `#121212`, card surface `#181818`, hover surface `#282828`.
 - Text `#ffffff`, muted text `#b3b3b3`. Accent `#1DB954` (Spotify green).
@@ -14,16 +62,15 @@
 **Layout**
 
 - Sticky slim header: wordmark (left), nav links `All Playlists` · `Featured` and a search bar (right). The active nav link shows an accent-colored underline.
-- Playlist grid uses `grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))` with a `24px` gap so at least 6 tiles fit on a laptop at full screen and reflow responsively without media queries.
+- Playlist grid should have at least 6 tiles fit on a laptop at full screen and reflow responsively without media queries.
 
 **Interaction rules**
 
 1. **Render on load** — On page load, `renderPlaylists()` reads the playlist data array and builds one tile per playlist into the grid. Each tile shows the cover image, playlist name (bold), author (muted), and a footer row with a heart icon and like count.
 2. **Open details modal** — Clicking a tile anywhere *except the heart* opens a centered modal populated with the playlist's cover, name, author, and song list (title · artist · duration). The backdrop darkens to `rgba(0,0,0,0.6)` with a blur and page scroll is locked. The modal closes on backdrop click, the ✕ button, or the `Esc` key.
-3. **Like toggle** — Clicking the heart toggles only that playlist's liked state and calls `event.stopPropagation()` so the modal does not open. Unliked → liked: like count `+1` and the heart fills with the accent color. Liked → unliked: like count `-1` and the heart returns to its outline state. Liked state is held on the playlist object in memory.
-4. **Shuffle songs** — A shuffle button in the detail modal reorders that playlist's song array (Fisher–Yates) and re-renders the song list so the order visibly differs from the previous render.
+3. **Like toggle** — Clicking the heart toggles only that playlist's liked state and make sure the modal does not open. Unliked → liked: like count `+1` and the heart fills with the accent color. Liked → unliked: like count `-1` and the heart returns to its outline state. Liked state is held on the playlist object in memory.
+4. **Shuffle songs** — A shuffle button in the detail modal reorders that playlist's song array and re-renders the song list so the order visibly differs from the previous render.
 5. **Navigation** — Header links switch between the All Playlists view and the Featured page without using the browser's back/forward buttons.
-6. **Featured randomization** — On Featured page load, a random index is chosen from the playlists array and that playlist's image, name, and full song list are rendered. Reloading the page selects a new playlist (the same one may appear twice in a row).
 
 ### Function Specs
 [Add function specs here as you plan each milestone]

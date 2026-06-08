@@ -3,24 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Music Playlist Explorer</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <!-- Your header content here -->
+
+    <!-- Sticky Header -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-wordmark">Music Playlist Explorer</h1>
+
+            <nav class="header-nav">
+                <a href="#" class="header-nav-link header-nav-link--active">All Playlists</a>
+                <span class="header-nav-separator">·</span>
+                <a href="#" class="header-nav-link">Featured</a>
+            </nav>
+
+            <input type="search" class="header-search" placeholder="Search playlists..." aria-label="Search playlists">
+        </div>
     </header>
 
-    <main> 
-        <!-- Your main content here -->
+    <!-- Main Content Area -->
+    <main class="main">
+        <div class="playlist-cards" id="playlistCards">
+            <!-- Sample hard-coded playlist cards -->
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+
+            <article class="playlist-card">
+                <img src="https://via.placeholder.com/220" alt="Playlist cover" class="playlist-card-cover">
+                <h3 class="playlist-card-name">Playlist Title</h3>
+                <p class="playlist-card-author">Creator Name</p>
+                <div class="playlist-card-footer">
+                    <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+                    <span class="playlist-card-like-count">5</span>
+                </div>
+            </article>
+        </div>
     </main>
 
-    <footer>
-        <!-- Your footer content here -->
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">&copy; 2026 Music Playlist Explorer</p>
     </footer>
+
+    <!-- Modal Overlay (hidden by default) - clicking this backdrop closes the modal -->
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+
+            <div class="modal-header">
+                <img src="https://via.placeholder.com/150" alt="Playlist cover" class="modal-cover">
+                <div class="modal-info">
+                    <h2 class="modal-name">Playlist Title</h2>
+                    <p class="modal-author">Creator Name</p>
+                </div>
+            </div>
+
+            <button class="modal-shuffle-btn">Shuffle Songs</button>
+
+            <ul class="modal-song-list">
+                <li class="modal-song-item">
+                    <span class="modal-song-title">Song Title</span>
+                    <span class="modal-song-artist">Artist Name</span>
+                    <span class="modal-song-duration">3:45</span>
+                </li>
+                <li class="modal-song-item">
+                    <span class="modal-song-title">Another Song</span>
+                    <span class="modal-song-artist">Artist Name</span>
+                    <span class="modal-song-duration">4:12</span>
+                </li>
+                <li class="modal-song-item">
+                    <span class="modal-song-title">Third Track</span>
+                    <span class="modal-song-artist">Artist Name</span>
+                    <span class="modal-song-duration">2:58</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <script src="data/data.js"></script>
     <script src="script.js"></script>
 </body>
