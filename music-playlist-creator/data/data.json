@@ -2,277 +2,305 @@
   "playlists": [
     {
       "id": "playlist-1",
-      "playlistName": "Chill Vibes",
-      "playlistAuthor": "DJ Smooth",
+      "playlistName": "Happy Vibes",
+      "playlistAuthor": "Mood Curator",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=1",
-      "likeCount": 42,
+      "likeCount": 542,
       "isLiked": false,
       "songs": [
         {
-          "title": "Sunset Dreams",
-          "artist": "The Relaxers",
-          "album": "Summer Nights",
-          "duration": "3:45",
+          "title": "Happy",
+          "artist": "Pharrell Williams",
+          "album": "G I R L",
+          "duration": "3:53",
           "cover": "https://picsum.photos/60/60?random=10"
         },
         {
-          "title": "Ocean Breeze",
-          "artist": "Wave Riders",
-          "album": "Coastal Sounds",
-          "duration": "4:12",
+          "title": "Good 4 U",
+          "artist": "Olivia Rodrigo",
+          "album": "SOUR",
+          "duration": "2:58",
           "cover": "https://picsum.photos/60/60?random=11"
         },
         {
-          "title": "Lazy Afternoon",
-          "artist": "Chill Masters",
-          "album": "Easy Living",
-          "duration": "3:28",
+          "title": "Mr. Blue Sky",
+          "artist": "Electric Light Orchestra",
+          "album": "Out of the Blue",
+          "duration": "5:03",
           "cover": "https://picsum.photos/60/60?random=12"
         },
         {
-          "title": "Peaceful Mind",
-          "artist": "Zen Collective",
-          "album": "Mindfulness",
-          "duration": "5:01",
+          "title": "Walking on Sunshine",
+          "artist": "Katrina and the Waves",
+          "album": "Walking on Sunshine",
+          "duration": "3:59",
           "cover": "https://picsum.photos/60/60?random=13"
         }
       ]
     },
     {
       "id": "playlist-2",
-      "playlistName": "Workout Energy",
-      "playlistAuthor": "FitBeats",
+      "playlistName": "Sad & Emotional",
+      "playlistAuthor": "Feels Station",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=2",
-      "likeCount": 128,
+      "likeCount": 389,
       "isLiked": false,
       "songs": [
         {
-          "title": "Power Up",
-          "artist": "Electric Pulse",
-          "album": "High Energy",
-          "duration": "3:22",
+          "title": "Someone Like You",
+          "artist": "Adele",
+          "album": "21",
+          "duration": "4:45",
           "cover": "https://picsum.photos/60/60?random=14"
         },
         {
-          "title": "Running Wild",
-          "artist": "Thunder Beats",
-          "album": "Unstoppable",
-          "duration": "3:55",
+          "title": "The Night We Met",
+          "artist": "Lord Huron",
+          "album": "Strange Trails",
+          "duration": "3:28",
           "cover": "https://picsum.photos/60/60?random=15"
         },
         {
-          "title": "Beast Mode",
-          "artist": "Adrenaline Rush",
-          "album": "Peak Performance",
-          "duration": "4:08",
+          "title": "Skinny Love",
+          "artist": "Bon Iver",
+          "album": "For Emma, Forever Ago",
+          "duration": "3:58",
           "cover": "https://picsum.photos/60/60?random=16"
+        },
+        {
+          "title": "Fix You",
+          "artist": "Coldplay",
+          "album": "X&Y",
+          "duration": "4:54",
+          "cover": "https://picsum.photos/60/60?random=17"
         }
       ]
     },
     {
       "id": "playlist-3",
-      "playlistName": "Focus Flow",
-      "playlistAuthor": "Study Central",
+      "playlistName": "Workout Motivation",
+      "playlistAuthor": "Gym Beast",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=3",
-      "likeCount": 87,
+      "likeCount": 721,
       "isLiked": false,
       "songs": [
         {
-          "title": "Deep Concentration",
-          "artist": "Ambient Minds",
-          "album": "Focus Sessions",
-          "duration": "6:30",
-          "cover": "https://picsum.photos/60/60?random=17"
-        },
-        {
-          "title": "Study Groove",
-          "artist": "Lo-Fi Beats",
-          "album": "Productivity",
-          "duration": "4:45",
+          "title": "Eye of the Tiger",
+          "artist": "Survivor",
+          "album": "Eye of the Tiger",
+          "duration": "4:05",
           "cover": "https://picsum.photos/60/60?random=18"
         },
         {
-          "title": "Quiet Thoughts",
-          "artist": "Piano Sessions",
-          "album": "Reflection",
-          "duration": "5:20",
+          "title": "Stronger",
+          "artist": "Kanye West",
+          "album": "Graduation",
+          "duration": "5:11",
           "cover": "https://picsum.photos/60/60?random=19"
         },
         {
-          "title": "Steady Rhythm",
-          "artist": "Background Vibes",
-          "album": "Work Mode",
-          "duration": "4:15",
+          "title": "Till I Collapse",
+          "artist": "Eminem ft. Nate Dogg",
+          "album": "The Eminem Show",
+          "duration": "4:57",
           "cover": "https://picsum.photos/60/60?random=20"
+        },
+        {
+          "title": "Remember the Name",
+          "artist": "Fort Minor",
+          "album": "The Rising Tied",
+          "duration": "3:50",
+          "cover": "https://picsum.photos/60/60?random=21"
         }
       ]
     },
     {
       "id": "playlist-4",
-      "playlistName": "Night Drive",
-      "playlistAuthor": "Midnight Cruiser",
+      "playlistName": "Chill & Relax",
+      "playlistAuthor": "Zen Master",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=4",
-      "likeCount": 203,
+      "likeCount": 456,
       "isLiked": false,
       "songs": [
         {
-          "title": "City Lights",
-          "artist": "Neon Dreams",
-          "album": "Urban Nights",
-          "duration": "4:33",
-          "cover": "https://picsum.photos/60/60?random=21"
-        },
-        {
-          "title": "Highway Stars",
-          "artist": "Synthwave Collective",
-          "album": "Retro Future",
-          "duration": "5:12",
+          "title": "Weightless",
+          "artist": "Marconi Union",
+          "album": "Weightless",
+          "duration": "8:09",
           "cover": "https://picsum.photos/60/60?random=22"
         },
         {
-          "title": "Midnight Run",
-          "artist": "Drive Forever",
-          "album": "Open Road",
-          "duration": "3:58",
+          "title": "Banana Pancakes",
+          "artist": "Jack Johnson",
+          "album": "In Between Dreams",
+          "duration": "3:12",
           "cover": "https://picsum.photos/60/60?random=23"
+        },
+        {
+          "title": "Electric Feel",
+          "artist": "MGMT",
+          "album": "Oracular Spectacular",
+          "duration": "3:49",
+          "cover": "https://picsum.photos/60/60?random=24"
+        },
+        {
+          "title": "Island in the Sun",
+          "artist": "Weezer",
+          "album": "Weezer (Green Album)",
+          "duration": "3:20",
+          "cover": "https://picsum.photos/60/60?random=25"
         }
       ]
     },
     {
       "id": "playlist-5",
-      "playlistName": "Coffee Shop Acoustics",
-      "playlistAuthor": "Indie Curator",
+      "playlistName": "Rock Classics",
+      "playlistAuthor": "Rock Legend",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=5",
-      "likeCount": 156,
+      "likeCount": 892,
       "isLiked": false,
       "songs": [
         {
-          "title": "Morning Coffee",
-          "artist": "Acoustic Dreams",
-          "album": "Simple Moments",
-          "duration": "3:15",
-          "cover": "https://picsum.photos/60/60?random=24"
-        },
-        {
-          "title": "Rainy Day",
-          "artist": "Folk Tales",
-          "album": "Weathered Heart",
-          "duration": "4:02",
-          "cover": "https://picsum.photos/60/60?random=25"
-        },
-        {
-          "title": "Soft Whispers",
-          "artist": "Gentle Strings",
-          "album": "Intimate Sessions",
-          "duration": "3:47",
+          "title": "Bohemian Rhapsody",
+          "artist": "Queen",
+          "album": "A Night at the Opera",
+          "duration": "5:55",
           "cover": "https://picsum.photos/60/60?random=26"
         },
         {
-          "title": "Street Corner",
-          "artist": "Urban Folk",
-          "album": "City Stories",
-          "duration": "4:28",
+          "title": "Stairway to Heaven",
+          "artist": "Led Zeppelin",
+          "album": "Led Zeppelin IV",
+          "duration": "8:02",
           "cover": "https://picsum.photos/60/60?random=27"
+        },
+        {
+          "title": "Hotel California",
+          "artist": "Eagles",
+          "album": "Hotel California",
+          "duration": "6:30",
+          "cover": "https://picsum.photos/60/60?random=28"
+        },
+        {
+          "title": "Sweet Child O' Mine",
+          "artist": "Guns N' Roses",
+          "album": "Appetite for Destruction",
+          "duration": "5:56",
+          "cover": "https://picsum.photos/60/60?random=29"
         }
       ]
     },
     {
       "id": "playlist-6",
-      "playlistName": "Dance Party",
-      "playlistAuthor": "Party Starter",
+      "playlistName": "Hip-Hop Essentials",
+      "playlistAuthor": "Hip Hop Head",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=6",
-      "likeCount": 312,
+      "likeCount": 634,
       "isLiked": false,
       "songs": [
         {
-          "title": "Get Up",
-          "artist": "Dance Floor",
-          "album": "Move Your Body",
-          "duration": "3:38",
-          "cover": "https://picsum.photos/60/60?random=28"
-        },
-        {
-          "title": "Feel the Beat",
-          "artist": "DJ Rhythm",
-          "album": "Club Nights",
-          "duration": "4:15",
-          "cover": "https://picsum.photos/60/60?random=29"
-        },
-        {
-          "title": "All Night Long",
-          "artist": "Party People",
-          "album": "Non-Stop",
-          "duration": "3:52",
+          "title": "Lose Yourself",
+          "artist": "Eminem",
+          "album": "8 Mile Soundtrack",
+          "duration": "5:26",
           "cover": "https://picsum.photos/60/60?random=30"
+        },
+        {
+          "title": "Juicy",
+          "artist": "The Notorious B.I.G.",
+          "album": "Ready to Die",
+          "duration": "5:02",
+          "cover": "https://picsum.photos/60/60?random=31"
+        },
+        {
+          "title": "HUMBLE.",
+          "artist": "Kendrick Lamar",
+          "album": "DAMN.",
+          "duration": "2:57",
+          "cover": "https://picsum.photos/60/60?random=32"
+        },
+        {
+          "title": "Sicko Mode",
+          "artist": "Travis Scott",
+          "album": "ASTROWORLD",
+          "duration": "5:12",
+          "cover": "https://picsum.photos/60/60?random=33"
         }
       ]
     },
     {
       "id": "playlist-7",
-      "playlistName": "Jazz Classics",
-      "playlistAuthor": "Smooth Jazz",
+      "playlistName": "Pop Hits",
+      "playlistAuthor": "Chart Topper",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=7",
-      "likeCount": 94,
+      "likeCount": 1024,
       "isLiked": false,
       "songs": [
         {
-          "title": "Blue Note",
-          "artist": "Jazz Ensemble",
-          "album": "Classic Standards",
-          "duration": "5:45",
-          "cover": "https://picsum.photos/60/60?random=31"
-        },
-        {
-          "title": "Midnight Sax",
-          "artist": "Smooth Operators",
-          "album": "Late Night",
-          "duration": "6:12",
-          "cover": "https://picsum.photos/60/60?random=32"
-        },
-        {
-          "title": "Take Five",
-          "artist": "Modern Jazz",
-          "album": "Timeless",
-          "duration": "5:24",
-          "cover": "https://picsum.photos/60/60?random=33"
-        },
-        {
-          "title": "Cool Breeze",
-          "artist": "West Coast Jazz",
-          "album": "California Nights",
-          "duration": "4:58",
+          "title": "Blinding Lights",
+          "artist": "The Weeknd",
+          "album": "After Hours",
+          "duration": "3:20",
           "cover": "https://picsum.photos/60/60?random=34"
+        },
+        {
+          "title": "Shape of You",
+          "artist": "Ed Sheeran",
+          "album": "÷ (Divide)",
+          "duration": "3:53",
+          "cover": "https://picsum.photos/60/60?random=35"
+        },
+        {
+          "title": "Levitating",
+          "artist": "Dua Lipa",
+          "album": "Future Nostalgia",
+          "duration": "3:23",
+          "cover": "https://picsum.photos/60/60?random=36"
+        },
+        {
+          "title": "Anti-Hero",
+          "artist": "Taylor Swift",
+          "album": "Midnights",
+          "duration": "3:20",
+          "cover": "https://picsum.photos/60/60?random=37"
         }
       ]
     },
     {
       "id": "playlist-8",
-      "playlistName": "Rock Anthems",
-      "playlistAuthor": "Rock Legend",
+      "playlistName": "EDM Bangers",
+      "playlistAuthor": "DJ Pulse",
       "playlistCoverUrl": "https://picsum.photos/300/300?random=8",
-      "likeCount": 267,
+      "likeCount": 578,
       "isLiked": false,
       "songs": [
         {
-          "title": "Thunder Road",
-          "artist": "Electric Storm",
-          "album": "Greatest Hits",
-          "duration": "4:42",
-          "cover": "https://picsum.photos/60/60?random=35"
+          "title": "Titanium",
+          "artist": "David Guetta ft. Sia",
+          "album": "Nothing but the Beat",
+          "duration": "4:05",
+          "cover": "https://picsum.photos/60/60?random=38"
         },
         {
-          "title": "Born to Rock",
-          "artist": "Heavy Guitars",
-          "album": "Live and Loud",
-          "duration": "3:55",
-          "cover": "https://picsum.photos/60/60?random=36"
+          "title": "Levels",
+          "artist": "Avicii",
+          "album": "Levels",
+          "duration": "3:18",
+          "cover": "https://picsum.photos/60/60?random=39"
         },
         {
-          "title": "Revolution",
-          "artist": "Rock Warriors",
-          "album": "Uprising",
-          "duration": "4:18",
-          "cover": "https://picsum.photos/60/60?random=37"
+          "title": "Animals",
+          "artist": "Martin Garrix",
+          "album": "Animals",
+          "duration": "5:02",
+          "cover": "https://picsum.photos/60/60?random=40"
+        },
+        {
+          "title": "Wake Me Up",
+          "artist": "Avicii",
+          "album": "True",
+          "duration": "4:09",
+          "cover": "https://picsum.photos/60/60?random=41"
         }
       ]
     }
