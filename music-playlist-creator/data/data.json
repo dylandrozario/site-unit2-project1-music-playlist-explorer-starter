@@ -1,0 +1,280 @@
+{
+  "playlists": [
+    {
+      "id": "playlist-1",
+      "playlistName": "Chill Vibes",
+      "playlistAuthor": "DJ Smooth",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=1",
+      "likeCount": 42,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Sunset Dreams",
+          "artist": "The Relaxers",
+          "album": "Summer Nights",
+          "duration": "3:45",
+          "cover": "https://picsum.photos/60/60?random=10"
+        },
+        {
+          "title": "Ocean Breeze",
+          "artist": "Wave Riders",
+          "album": "Coastal Sounds",
+          "duration": "4:12",
+          "cover": "https://picsum.photos/60/60?random=11"
+        },
+        {
+          "title": "Lazy Afternoon",
+          "artist": "Chill Masters",
+          "album": "Easy Living",
+          "duration": "3:28",
+          "cover": "https://picsum.photos/60/60?random=12"
+        },
+        {
+          "title": "Peaceful Mind",
+          "artist": "Zen Collective",
+          "album": "Mindfulness",
+          "duration": "5:01",
+          "cover": "https://picsum.photos/60/60?random=13"
+        }
+      ]
+    },
+    {
+      "id": "playlist-2",
+      "playlistName": "Workout Energy",
+      "playlistAuthor": "FitBeats",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=2",
+      "likeCount": 128,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Power Up",
+          "artist": "Electric Pulse",
+          "album": "High Energy",
+          "duration": "3:22",
+          "cover": "https://picsum.photos/60/60?random=14"
+        },
+        {
+          "title": "Running Wild",
+          "artist": "Thunder Beats",
+          "album": "Unstoppable",
+          "duration": "3:55",
+          "cover": "https://picsum.photos/60/60?random=15"
+        },
+        {
+          "title": "Beast Mode",
+          "artist": "Adrenaline Rush",
+          "album": "Peak Performance",
+          "duration": "4:08",
+          "cover": "https://picsum.photos/60/60?random=16"
+        }
+      ]
+    },
+    {
+      "id": "playlist-3",
+      "playlistName": "Focus Flow",
+      "playlistAuthor": "Study Central",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=3",
+      "likeCount": 87,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Deep Concentration",
+          "artist": "Ambient Minds",
+          "album": "Focus Sessions",
+          "duration": "6:30",
+          "cover": "https://picsum.photos/60/60?random=17"
+        },
+        {
+          "title": "Study Groove",
+          "artist": "Lo-Fi Beats",
+          "album": "Productivity",
+          "duration": "4:45",
+          "cover": "https://picsum.photos/60/60?random=18"
+        },
+        {
+          "title": "Quiet Thoughts",
+          "artist": "Piano Sessions",
+          "album": "Reflection",
+          "duration": "5:20",
+          "cover": "https://picsum.photos/60/60?random=19"
+        },
+        {
+          "title": "Steady Rhythm",
+          "artist": "Background Vibes",
+          "album": "Work Mode",
+          "duration": "4:15",
+          "cover": "https://picsum.photos/60/60?random=20"
+        }
+      ]
+    },
+    {
+      "id": "playlist-4",
+      "playlistName": "Night Drive",
+      "playlistAuthor": "Midnight Cruiser",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=4",
+      "likeCount": 203,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "City Lights",
+          "artist": "Neon Dreams",
+          "album": "Urban Nights",
+          "duration": "4:33",
+          "cover": "https://picsum.photos/60/60?random=21"
+        },
+        {
+          "title": "Highway Stars",
+          "artist": "Synthwave Collective",
+          "album": "Retro Future",
+          "duration": "5:12",
+          "cover": "https://picsum.photos/60/60?random=22"
+        },
+        {
+          "title": "Midnight Run",
+          "artist": "Drive Forever",
+          "album": "Open Road",
+          "duration": "3:58",
+          "cover": "https://picsum.photos/60/60?random=23"
+        }
+      ]
+    },
+    {
+      "id": "playlist-5",
+      "playlistName": "Coffee Shop Acoustics",
+      "playlistAuthor": "Indie Curator",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=5",
+      "likeCount": 156,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Morning Coffee",
+          "artist": "Acoustic Dreams",
+          "album": "Simple Moments",
+          "duration": "3:15",
+          "cover": "https://picsum.photos/60/60?random=24"
+        },
+        {
+          "title": "Rainy Day",
+          "artist": "Folk Tales",
+          "album": "Weathered Heart",
+          "duration": "4:02",
+          "cover": "https://picsum.photos/60/60?random=25"
+        },
+        {
+          "title": "Soft Whispers",
+          "artist": "Gentle Strings",
+          "album": "Intimate Sessions",
+          "duration": "3:47",
+          "cover": "https://picsum.photos/60/60?random=26"
+        },
+        {
+          "title": "Street Corner",
+          "artist": "Urban Folk",
+          "album": "City Stories",
+          "duration": "4:28",
+          "cover": "https://picsum.photos/60/60?random=27"
+        }
+      ]
+    },
+    {
+      "id": "playlist-6",
+      "playlistName": "Dance Party",
+      "playlistAuthor": "Party Starter",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=6",
+      "likeCount": 312,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Get Up",
+          "artist": "Dance Floor",
+          "album": "Move Your Body",
+          "duration": "3:38",
+          "cover": "https://picsum.photos/60/60?random=28"
+        },
+        {
+          "title": "Feel the Beat",
+          "artist": "DJ Rhythm",
+          "album": "Club Nights",
+          "duration": "4:15",
+          "cover": "https://picsum.photos/60/60?random=29"
+        },
+        {
+          "title": "All Night Long",
+          "artist": "Party People",
+          "album": "Non-Stop",
+          "duration": "3:52",
+          "cover": "https://picsum.photos/60/60?random=30"
+        }
+      ]
+    },
+    {
+      "id": "playlist-7",
+      "playlistName": "Jazz Classics",
+      "playlistAuthor": "Smooth Jazz",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=7",
+      "likeCount": 94,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Blue Note",
+          "artist": "Jazz Ensemble",
+          "album": "Classic Standards",
+          "duration": "5:45",
+          "cover": "https://picsum.photos/60/60?random=31"
+        },
+        {
+          "title": "Midnight Sax",
+          "artist": "Smooth Operators",
+          "album": "Late Night",
+          "duration": "6:12",
+          "cover": "https://picsum.photos/60/60?random=32"
+        },
+        {
+          "title": "Take Five",
+          "artist": "Modern Jazz",
+          "album": "Timeless",
+          "duration": "5:24",
+          "cover": "https://picsum.photos/60/60?random=33"
+        },
+        {
+          "title": "Cool Breeze",
+          "artist": "West Coast Jazz",
+          "album": "California Nights",
+          "duration": "4:58",
+          "cover": "https://picsum.photos/60/60?random=34"
+        }
+      ]
+    },
+    {
+      "id": "playlist-8",
+      "playlistName": "Rock Anthems",
+      "playlistAuthor": "Rock Legend",
+      "playlistCoverUrl": "https://picsum.photos/300/300?random=8",
+      "likeCount": 267,
+      "isLiked": false,
+      "songs": [
+        {
+          "title": "Thunder Road",
+          "artist": "Electric Storm",
+          "album": "Greatest Hits",
+          "duration": "4:42",
+          "cover": "https://picsum.photos/60/60?random=35"
+        },
+        {
+          "title": "Born to Rock",
+          "artist": "Heavy Guitars",
+          "album": "Live and Loud",
+          "duration": "3:55",
+          "cover": "https://picsum.photos/60/60?random=36"
+        },
+        {
+          "title": "Revolution",
+          "artist": "Rock Warriors",
+          "album": "Uprising",
+          "duration": "4:18",
+          "cover": "https://picsum.photos/60/60?random=37"
+        }
+      ]
+    }
+  ]
+}
