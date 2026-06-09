@@ -1,6 +1,4 @@
-*{
-    border: 1px solid red;
-}
+
 
 body {
     font-family: 'Arial', sans-serif;
@@ -172,20 +170,22 @@ body {
 .playlist-card-heart {
     background: none;
     border: none;
-    font-size: 18px;
-    color: #b3b3b3;
+    font-size: 24px;
+    color: transparent;
     cursor: pointer;
     padding: 0;
     transition: color 0.2s ease, transform 0.2s ease;
+    -webkit-text-stroke: 1px #b3b3b3; /* Outline effect */
 }
 
 .playlist-card-heart:hover {
-    color: #e74c3c;
+    -webkit-text-stroke: 1px #e74c3c;
     transform: scale(1.1);
 }
 
 .playlist-card-heart--liked {
     color: #e74c3c;
+    -webkit-text-stroke: 1px #e74c3c; /* Filled effect */
 }
 
 .playlist-card-like-count {

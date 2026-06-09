@@ -77,6 +77,30 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+// Like toggle function
+function toggleLike(playlist, heartButton, likeCountSpan) {
+    // Check current liked state
+    if (playlist.isLiked) {
+        // PREVIOUSLY LIKED → UNLIKE
+        // Data model changes
+        playlist.isLiked = false;
+        playlist.likeCount--;
+
+        // DOM changes
+        heartButton.classList.remove('playlist-card-heart--liked');
+        likeCountSpan.textContent = playlist.likeCount;
+    } else {
+        // PREVIOUSLY UNLIKED → LIKE
+        // Data model changes
+        playlist.isLiked = true;
+        playlist.likeCount++;
+
+        // DOM changes
+        heartButton.classList.add('playlist-card-heart--liked');
+        likeCountSpan.textContent = playlist.likeCount;
+    }
+}
+
 function cardCreation(playlist) {
     console.log("In cardCreation function");
     const playlistCard = document.createElement("article");
@@ -86,10 +110,20 @@ function cardCreation(playlist) {
         <h3 class="playlist-card-name">${playlist.playlistName}</h3>
         <p class="playlist-card-author">${playlist.playlistAuthor}</p>
         <div class="playlist-card-footer">
-            <button class="playlist-card-heart" aria-label="Like playlist">♡</button>
+            <button class="playlist-card-heart" aria-label="Like playlist">♥</button>
             <span class="playlist-card-like-count">${playlist.likeCount}</span>
         </div>
     `;
+
+    // Get heart button and like count span for event listeners
+    const heartButton = playlistCard.querySelector('.playlist-card-heart');
+    const likeCountSpan = playlistCard.querySelector('.playlist-card-like-count');
+
+    // Add click event listener to heart button for like toggle
+    heartButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent modal from opening
+        toggleLike(playlist, heartButton, likeCountSpan);
+    });
 
     // Add click event listener to open modal when card is clicked
     playlistCard.addEventListener('click', () => {
