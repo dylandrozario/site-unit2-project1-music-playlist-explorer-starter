@@ -1,5 +1,23 @@
 ## Music Playlist Explorer — Planning Spec
 
+### Data Schema
+
+**Playlist Object:**
+- `id` (string) — Unique identifier for the playlist to track and reference individual playlists
+- `playlistName` (string) — The name of the playlist displayed on the tile and in the modal
+- `playlistAuthor` (string) — The creator/author of the playlist displayed on the tile and in the modal
+- `playlistCoverUrl` (string) — URL or path to the cover image displayed on the tile and in the modal
+- `likeCount` (number) — The number of likes for the playlist, displayed next to the heart icon
+- `isLiked` (boolean) — Tracks whether the current user has liked this playlist (affects heart icon color)
+- `songs` (array of Song objects) — Collection of songs that belong to this playlist
+
+**Song Object:**
+- `title` (string) — The name of the song displayed in the modal's song list
+- `artist` (string) — The artist who performed the song, displayed below the title in the modal
+- `album` (string) — The album name the song belongs to, displayed below the artist in the modal
+- `duration` (string) — The length of the song in mm:ss format, displayed on the right side of each song item
+- `cover` (string) — URL or path to the song's cover image (60x60px thumbnail) displayed in the modal
+
 ### Data Shape
 
 ```js
@@ -92,3 +110,23 @@ const playlists = [
 - Accent color: Spotify green `#1DB954`.
 - Grid uses `repeat(auto-fill, minmax(220px, 1fr))` instead of a fixed column count so the "≥6 tiles visible on a laptop" requirement is met responsively without media queries.
 - Like state and shuffle order are kept on in-memory playlist objects for now; persistence (localStorage) deferred to a later milestone if needed.
+
+**Milestone 1 — HTML structure**
+
+- Built semantic HTML with `<header>`, `<main>`, and `<footer>` elements for proper document structure.
+- Created 8 hard-coded playlist cards with all required fields: cover image, title, author, heart icon, and like count.
+- Used single-hyphen class naming convention (`.playlist-card-name`) instead of BEM double-underscore for simplicity.
+- Modal structure uses `.modal-overlay` as outer container with `.modal-content` inside for proper backdrop/content separation.
+- Added song list structure with small cover images (60x60px), stacked text (title/artist/album), and right-aligned duration.
+- Validated HTML structure matches planning.md spec and wireframes before accepting AI-generated code.
+
+**Milestone 2 — CSS styling**
+
+- Changed header/footer from dark gray to darker green (`#17a34a`) with shadows for visual prominence and brand consistency.
+- Changed main background to very dark gray (`#0a0a0a`) with border-radius for visual separation from pure black body.
+- Updated grid from responsive `auto-fill` to fixed 4 columns per row (`repeat(4, 1fr)`) for consistent layout.
+- Made like heart red (`#e74c3c`) instead of green for better visual feedback and universal "like" convention.
+- Added hover effects: cards lift up (`translateY(-4px)`), hearts scale (`scale(1.1)`), subtle color transitions throughout.
+- Modal song items given lighter background (`#2a2a2a`) with 8px vertical gaps for better visibility and separation.
+- Moved nav links to right side of header using `margin-left: auto` for better visual balance.
+- Reviewed all AI-generated CSS against visual intent and planning.md spec before accepting.
