@@ -28,8 +28,21 @@
 
     <!-- Main Content Area -->
     <main class="main">
+        <div class="main-controls">
+            <button class="create-playlist-btn" id="openCreateModalBtn">+ Create New Playlist</button>
+
+            <div class="sort-controls">
+                <label for="sortSelect" class="sort-label">Sort by:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="dateAdded">Date Added (Newest First)</option>
+                    <option value="name">Name (A-Z)</option>
+                    <option value="likes">Likes (High to Low)</option>
+                </select>
+            </div>
+        </div>
+
         <div class="playlist-cards" id="playlistCards">
-            
+
         </div>
     </main>
 
@@ -52,6 +65,11 @@
             </div>
 
             <button class="modal-shuffle-btn">Shuffle Songs</button>
+
+            <div class="modal-ai-section">
+                <button class="modal-ai-description-btn">Generate AI Description</button>
+                <p class="modal-ai-description-text"></p>
+            </div>
 
             <ul class="modal-song-list">
                 <li class="modal-song-item">
@@ -85,7 +103,83 @@
         </div>
     </div>
 
-    <script src="data/data.json"></script>
+    <!-- Create Playlist Modal -->
+    <div class="create-playlist-modal" id="createPlaylistModal">
+        <div class="create-playlist-content">
+            <button class="modal-close" id="closeCreateModalBtn">&times;</button>
+            <h2 class="create-playlist-title">Create New Playlist</h2>
+
+            <form class="create-playlist-form" id="createPlaylistForm">
+                <div class="form-group">
+                    <label for="playlistNameInput">Playlist Name *</label>
+                    <input type="text" id="playlistNameInput" placeholder="My Awesome Playlist" required minlength="3">
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="playlistAuthorInput">Creator Name *</label>
+                    <input type="text" id="playlistAuthorInput" placeholder="Your Name" required minlength="2">
+                    <span class="error-message" id="authorError"></span>
+                </div>
+
+                <h3 class="songs-section-title">Songs (1-10)</h3>
+                <div class="song-inputs-container" id="songInputsContainer">
+                    <!-- Song entries will be added here dynamically -->
+                </div>
+
+                <div class="song-controls">
+                    <button type="button" class="add-song-btn" id="addSongBtn">+ Add Song</button>
+                    <button type="button" class="remove-song-btn" id="removeSongBtn">- Remove Last Song</button>
+                </div>
+
+                <span class="error-message" id="formError"></span>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelCreateBtn">Cancel</button>
+                    <button type="submit" class="submit-btn" id="createPlaylistBtn">Create Playlist</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Playlist Modal -->
+    <div class="create-playlist-modal" id="editPlaylistModal">
+        <div class="create-playlist-content">
+            <button class="modal-close" id="closeEditModalBtn">&times;</button>
+            <h2 class="create-playlist-title">Edit Playlist</h2>
+
+            <form class="create-playlist-form" id="editPlaylistForm">
+                <div class="form-group">
+                    <label for="editPlaylistNameInput">Playlist Name *</label>
+                    <input type="text" id="editPlaylistNameInput" placeholder="My Awesome Playlist" required minlength="3">
+                    <span class="error-message" id="editNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPlaylistAuthorInput">Creator Name *</label>
+                    <input type="text" id="editPlaylistAuthorInput" placeholder="Your Name" required minlength="2">
+                    <span class="error-message" id="editAuthorError"></span>
+                </div>
+
+                <h3 class="songs-section-title">Songs (1-10)</h3>
+                <div class="song-inputs-container" id="editSongInputsContainer">
+                    <!-- Song entries will be added here dynamically -->
+                </div>
+
+                <div class="song-controls">
+                    <button type="button" class="add-song-btn" id="editAddSongBtn">+ Add Song</button>
+                </div>
+
+                <span class="error-message" id="editFormError"></span>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" id="cancelEditBtn">Cancel</button>
+                    <button type="submit" class="submit-btn" id="savePlaylistBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="secrets.js"></script>
     <script src="script.js"></script>
 </body>

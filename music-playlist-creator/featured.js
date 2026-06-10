@@ -1,3 +1,94 @@
+// AI playlist description function (same as in script.js)
+async function getPlaylistDescription(playlist) {
+    // Check if description is already cached
+    if (playlist.aiDescription && playlist.aiDescription.length > 0) {
+        return playlist.aiDescription;
+    }
+
+    // Check if API key exists
+    if (typeof API_KEY === 'undefined' || !API_KEY) {
+        console.error('API key not found');
+        return `${playlist.playlistName} - A curated collection of songs by ${playlist.playlistAuthor}.`;
+    }
+
+    try {
+        // Construct the prompt
+        const songList = playlist.songs
+            .map(song => `- ${song.title} by ${song.artist}`)
+            .join('\n');
+
+        const prompt = `You are a music curator writing playlist descriptions. Write a 2-3 sentence description for this playlist that captures its mood and vibe.
+
+Playlist: "${playlist.playlistName}"
+Creator: "${playlist.playlistAuthor}"
+Songs:
+${songList}
+
+Guidelines:
+- Describe the overall mood, vibe, and theme
+- Mention what activities or moments this suits
+- Don't list individual songs or artists
+- Use casual, conversational tone
+- Keep it to 2-3 sentences (40-80 words)`;
+
+        // Make API call with timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`,
+                'HTTP-Referer': window.location.origin,
+                'X-Title': 'Music Playlist Explorer'
+            },
+            body: JSON.stringify({
+                model: 'google/gemma-4-26b-a4b-it:free',
+                messages: [{
+                    role: 'user',
+                    content: prompt
+                }],
+                max_tokens: 1500
+            }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.status === 429) {
+            console.warn('API rate limit exceeded - free tier has request limits');
+            return `${playlist.playlistName} curated by ${playlist.playlistAuthor}. Rate limit reached - please try again in a moment.`;
+        }
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`API error: ${response.status}`, errorText);
+            return `Experience the vibe of ${playlist.playlistName}. Perfect for any moment when you need the right soundtrack.`;
+        }
+
+        const data = await response.json();
+        const description = data.choices?.[0]?.message?.content?.trim();
+
+        if (!description || description.length === 0) {
+            console.warn('Empty description received from API');
+            return `Discover ${playlist.playlistName} curated by ${playlist.playlistAuthor}. A handpicked selection of tracks for your listening pleasure.`;
+        }
+
+        playlist.aiDescription = description;
+        return description;
+
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.error('API request timeout');
+            return `${playlist.playlistName} brings together the perfect mix of tracks. Enjoy the curated experience.`;
+        }
+
+        console.error('Error getting playlist description:', error);
+        return `Explore ${playlist.playlistName} by ${playlist.playlistAuthor}. Each track carefully selected to create the perfect atmosphere.`;
+    }
+}
+
 // Select random playlist function
 function selectRandomPlaylist(playlists) {
     // Generate random index
