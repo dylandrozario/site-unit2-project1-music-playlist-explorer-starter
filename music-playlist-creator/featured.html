@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Featured Playlist - Music Playlist Explorer</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Header -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-wordmark">SimplePlays</h1>
+
+            <nav class="header-nav">
+                <a href="index.html" class="header-nav-link">All Playlists</a>
+                <span class="header-nav-separator">|</span>
+                <a href="featured.html" class="header-nav-link header-nav-link--active">Featured</a>
+            </nav>
+
+            <input type="search" class="header-search" placeholder="Search playlists..." aria-label="Search playlists">
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main">
+        <div class="featured-page">
+            <div class="featured-layout">
+                <!-- Left Section: Playlist Info -->
+                <div class="featured-left">
+                    <img src="" alt="Playlist cover" class="featured-cover">
+                    <h2 class="featured-name">Loading...</h2>
+                    <p class="featured-author">Loading...</p>
+                    <div class="featured-like-section">
+                        <button class="featured-heart" aria-label="Like playlist">♥</button>
+                        <span class="featured-like-count">0</span>
+                    </div>
+                </div>
+
+                <!-- Right Section: Tracklist -->
+                <div class="featured-right">
+                    <h3 class="featured-tracklist-header">Tracklist</h3>
+                    <ul class="featured-tracklist">
+                        <!-- Songs will be dynamically rendered here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">&copy; 2026 Music Playlist Explorer</p>
+    </footer>
+
+    <script src="data/data.json"></script>
+    <script src="secrets.js"></script>
+    <script src="featured.js"></script>
+</body>
+</html>

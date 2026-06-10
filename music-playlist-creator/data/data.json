@@ -9,6 +9,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-1",
           "title": "Happy",
           "artist": "Pharrell Williams",
           "album": "G I R L",
@@ -16,6 +17,7 @@
           "cover": "https://picsum.photos/60/60?random=10"
         },
         {
+          "id": "song-2",
           "title": "Good 4 U",
           "artist": "Olivia Rodrigo",
           "album": "SOUR",
@@ -23,6 +25,7 @@
           "cover": "https://picsum.photos/60/60?random=11"
         },
         {
+          "id": "song-3",
           "title": "Mr. Blue Sky",
           "artist": "Electric Light Orchestra",
           "album": "Out of the Blue",
@@ -30,6 +33,7 @@
           "cover": "https://picsum.photos/60/60?random=12"
         },
         {
+          "id": "song-4",
           "title": "Walking on Sunshine",
           "artist": "Katrina and the Waves",
           "album": "Walking on Sunshine",
@@ -47,6 +51,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-5",
           "title": "Someone Like You",
           "artist": "Adele",
           "album": "21",
@@ -54,6 +59,7 @@
           "cover": "https://picsum.photos/60/60?random=14"
         },
         {
+          "id": "song-6",
           "title": "The Night We Met",
           "artist": "Lord Huron",
           "album": "Strange Trails",
@@ -61,6 +67,7 @@
           "cover": "https://picsum.photos/60/60?random=15"
         },
         {
+          "id": "song-7",
           "title": "Skinny Love",
           "artist": "Bon Iver",
           "album": "For Emma, Forever Ago",
@@ -68,6 +75,7 @@
           "cover": "https://picsum.photos/60/60?random=16"
         },
         {
+          "id": "song-8",
           "title": "Fix You",
           "artist": "Coldplay",
           "album": "X&Y",
@@ -85,6 +93,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-9",
           "title": "Eye of the Tiger",
           "artist": "Survivor",
           "album": "Eye of the Tiger",
@@ -92,6 +101,7 @@
           "cover": "https://picsum.photos/60/60?random=18"
         },
         {
+          "id": "song-10",
           "title": "Stronger",
           "artist": "Kanye West",
           "album": "Graduation",
@@ -99,6 +109,7 @@
           "cover": "https://picsum.photos/60/60?random=19"
         },
         {
+          "id": "song-11",
           "title": "Till I Collapse",
           "artist": "Eminem ft. Nate Dogg",
           "album": "The Eminem Show",
@@ -106,6 +117,7 @@
           "cover": "https://picsum.photos/60/60?random=20"
         },
         {
+          "id": "song-12",
           "title": "Remember the Name",
           "artist": "Fort Minor",
           "album": "The Rising Tied",
@@ -123,6 +135,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-13",
           "title": "Weightless",
           "artist": "Marconi Union",
           "album": "Weightless",
@@ -130,6 +143,7 @@
           "cover": "https://picsum.photos/60/60?random=22"
         },
         {
+          "id": "song-14",
           "title": "Banana Pancakes",
           "artist": "Jack Johnson",
           "album": "In Between Dreams",
@@ -137,6 +151,7 @@
           "cover": "https://picsum.photos/60/60?random=23"
         },
         {
+          "id": "song-15",
           "title": "Electric Feel",
           "artist": "MGMT",
           "album": "Oracular Spectacular",
@@ -144,6 +159,7 @@
           "cover": "https://picsum.photos/60/60?random=24"
         },
         {
+          "id": "song-16",
           "title": "Island in the Sun",
           "artist": "Weezer",
           "album": "Weezer (Green Album)",
@@ -161,6 +177,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-17",
           "title": "Bohemian Rhapsody",
           "artist": "Queen",
           "album": "A Night at the Opera",
@@ -168,6 +185,7 @@
           "cover": "https://picsum.photos/60/60?random=26"
         },
         {
+          "id": "song-18",
           "title": "Stairway to Heaven",
           "artist": "Led Zeppelin",
           "album": "Led Zeppelin IV",
@@ -175,6 +193,7 @@
           "cover": "https://picsum.photos/60/60?random=27"
         },
         {
+          "id": "song-19",
           "title": "Hotel California",
           "artist": "Eagles",
           "album": "Hotel California",
@@ -182,6 +201,7 @@
           "cover": "https://picsum.photos/60/60?random=28"
         },
         {
+          "id": "song-20",
           "title": "Sweet Child O' Mine",
           "artist": "Guns N' Roses",
           "album": "Appetite for Destruction",
@@ -199,6 +219,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-21",
           "title": "Lose Yourself",
           "artist": "Eminem",
           "album": "8 Mile Soundtrack",
@@ -206,6 +227,7 @@
           "cover": "https://picsum.photos/60/60?random=30"
         },
         {
+          "id": "song-22",
           "title": "Juicy",
           "artist": "The Notorious B.I.G.",
           "album": "Ready to Die",
@@ -213,6 +235,7 @@
           "cover": "https://picsum.photos/60/60?random=31"
         },
         {
+          "id": "song-23",
           "title": "HUMBLE.",
           "artist": "Kendrick Lamar",
           "album": "DAMN.",
@@ -220,6 +243,7 @@
           "cover": "https://picsum.photos/60/60?random=32"
         },
         {
+          "id": "song-24",
           "title": "Sicko Mode",
           "artist": "Travis Scott",
           "album": "ASTROWORLD",
@@ -237,6 +261,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-25",
           "title": "Blinding Lights",
           "artist": "The Weeknd",
           "album": "After Hours",
@@ -244,6 +269,7 @@
           "cover": "https://picsum.photos/60/60?random=34"
         },
         {
+          "id": "song-26",
           "title": "Shape of You",
           "artist": "Ed Sheeran",
           "album": "÷ (Divide)",
@@ -251,6 +277,7 @@
           "cover": "https://picsum.photos/60/60?random=35"
         },
         {
+          "id": "song-27",
           "title": "Levitating",
           "artist": "Dua Lipa",
           "album": "Future Nostalgia",
@@ -258,6 +285,7 @@
           "cover": "https://picsum.photos/60/60?random=36"
         },
         {
+          "id": "song-28",
           "title": "Anti-Hero",
           "artist": "Taylor Swift",
           "album": "Midnights",
@@ -275,6 +303,7 @@
       "isLiked": false,
       "songs": [
         {
+          "id": "song-29",
           "title": "Titanium",
           "artist": "David Guetta ft. Sia",
           "album": "Nothing but the Beat",
@@ -282,6 +311,7 @@
           "cover": "https://picsum.photos/60/60?random=38"
         },
         {
+          "id": "song-30",
           "title": "Levels",
           "artist": "Avicii",
           "album": "Levels",
@@ -289,6 +319,7 @@
           "cover": "https://picsum.photos/60/60?random=39"
         },
         {
+          "id": "song-31",
           "title": "Animals",
           "artist": "Martin Garrix",
           "album": "Animals",
@@ -296,6 +327,7 @@
           "cover": "https://picsum.photos/60/60?random=40"
         },
         {
+          "id": "song-32",
           "title": "Wake Me Up",
           "artist": "Avicii",
           "album": "True",

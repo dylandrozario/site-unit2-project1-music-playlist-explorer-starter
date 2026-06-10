@@ -46,6 +46,10 @@ function openModal(playlist) {
 
     // 8. Lock page scroll
     document.body.style.overflow = 'hidden';
+
+    // 9. Add event listener to shuffle button
+    const shuffleBtn = document.querySelector('.modal-shuffle-btn');
+    shuffleBtn.onclick = () => shuffleSongs(playlist);
 }
 
 // Close modal function
@@ -99,6 +103,43 @@ function toggleLike(playlist, heartButton, likeCountSpan) {
         heartButton.classList.add('playlist-card-heart--liked');
         likeCountSpan.textContent = playlist.likeCount;
     }
+}
+
+// Shuffle songs function using Fisher-Yates algorithm
+function shuffleSongs(playlist) {
+    // Create a COPY of the songs array (don't mutate the original)
+    const shuffledSongs = [...playlist.songs];
+
+    // Shuffle the copy using Fisher-Yates algorithm
+    for (let i = shuffledSongs.length - 1; i > 0; i--) {
+        // Generate random index from 0 to i
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+
+        // Swap current element with randomly selected element
+        [shuffledSongs[i], shuffledSongs[randomIndex]] = [shuffledSongs[randomIndex], shuffledSongs[i]];
+    }
+
+    // Re-render the song list in the modal with shuffled order
+    const songList = document.querySelector('.modal-song-list');
+    songList.innerHTML = ''; // Clear existing songs
+
+    // Loop through shuffled songs and create song items
+    shuffledSongs.forEach(song => {
+        const songItem = document.createElement('li');
+        songItem.className = 'modal-song-item';
+
+        songItem.innerHTML = `
+            <img src="${song.cover}" alt="${song.title} cover" class="modal-song-cover">
+            <div class="modal-song-info">
+                <p class="modal-song-title">${song.title}</p>
+                <p class="modal-song-artist">${song.artist}</p>
+                <p class="modal-song-album">${song.album}</p>
+            </div>
+            <span class="modal-song-duration">${song.duration}</span>
+        `;
+
+        songList.appendChild(songItem);
+    });
 }
 
 function cardCreation(playlist) {

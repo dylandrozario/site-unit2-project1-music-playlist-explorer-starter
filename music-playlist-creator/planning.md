@@ -173,7 +173,191 @@ const playlists = [
   - Use `event.stopPropagation()` to prevent modal from opening when heart is clicked
   - Pass playlist object and DOM elements to toggle function
 
-- Shuffle function
+- Shuffle function (`shuffleSongs(playlist)`)
+  
+  **Purpose:**
+  - Randomly reorder the songs in the currently open playlist modal
+  - Provides a way for users to see songs in a different order without manually sorting
+  
+  **Data model changes:**
+  - Does NOT mutate the original `playlist.songs` array
+  - Creates a copy of the songs array using spread operator `[...playlist.songs]`
+  - Shuffles the copy using Fisher-Yates algorithm
+  - Original order is preserved in the playlist object
+  
+  **DOM changes:**
+  - Clear existing song list: set `.modal-song-list` innerHTML to empty string
+  - Loop through the shuffled copy array and for each song:
+    - Create `<li class="modal-song-item">`
+    - Add song cover image `.modal-song-cover` with `song.cover`
+    - Add song title `.modal-song-title` with `song.title`
+    - Add song artist `.modal-song-artist` with `song.artist`
+    - Add song album `.modal-song-album` with `song.album`
+    - Add song duration `.modal-song-duration` with `song.duration`
+    - Append to `.modal-song-list`
+  
+  **Shuffle algorithm (Fisher-Yates):**
+  1. Create a copy of `playlist.songs` array
+  2. Start from the last element in the copy
+  3. Generate a random index from 0 to current position using `Math.floor(Math.random() * (i + 1))`
+  4. Swap the current element with the randomly selected element using array destructuring
+  5. Move to the previous element and repeat
+  6. Continue until reaching the first element
+  
+  **Event handling:**
+  - Add click listener to `.modal-shuffle-btn` button in `openModal()` function
+  - When clicked, call `shuffleSongs(playlist)` with the current playlist object
+  - Button is only active when modal is open
+  
+  **Multi-shuffle behavior:**
+  - Each click produces a NEW random order (not toggling between two states)
+  - Multiple clicks will continue to produce different random arrangements
+  - No limit on number of shuffles
+  
+  **Original order preservation:**
+  - Closing and reopening the modal displays songs in their original order
+  - Original order is read from the unchanged `playlist.songs` array when `openModal()` runs
+  - Shuffle state is NOT persisted - it only affects the current modal view
+  - Page refresh reloads original order from data.json
+
+- Navigation functions
+
+### Featured Page Specification
+
+**Overview:**
+The Featured page is a separate HTML page (`featured.html`) that randomly selects and displays one playlist from the data. This page provides a detailed, focused view of a single playlist without requiring modal interaction.
+
+**Layout Structure (based on reference wireframe):**
+
+The page uses a horizontal split layout with two main sections:
+
+**Left Section (Playlist Info):**
+- Large square playlist cover image (approximately 200x200px)
+- Playlist name displayed below cover (large, bold, white text)
+- Playlist author/creator name (muted gray text)
+- Like button (heart icon) with like count
+- Positioned on the left side of the content area with vertical stacking
+
+**Right Section (Song List - "Tracklist"):**
+- Full-height song list table/list
+- Header: "Tracklist" text in white
+- Each song row displays:
+  - Track number (left-aligned, muted gray)
+  - Song title (bold white text)
+  - Artist name (muted gray text below title)
+  - Album name (muted gray text)
+  - Duration (right-aligned, muted gray, mm:ss format)
+- Songs displayed in a clean table-like format with consistent spacing
+- Rows have subtle hover effect (background darkens slightly)
+
+**Visual Design (using existing color scheme):**
+
+Colors:
+- Background: `#000000` (pure black)
+- Main content area: `#0a0a0a` (very dark gray) with `border-radius: 12px`
+- Song list container: `#1a1a1a` (card surface color)
+- Song row hover: `#242424` (hover surface)
+- Primary text: `#ffffff` (white)
+- Secondary text (artist, album, duration): `#b3b3b3` (muted text)
+- Tertiary text (track numbers): `#888888` (tertiary text)
+- Header/Footer: `#17a34a` (darker green) matching main site
+- Like heart: `#e74c3c` (red) for liked state
+
+Layout:
+- Same header and footer as main site (sticky header with green background)
+- Content area uses flexbox or grid for horizontal split (60/40 or 50/50)
+- Left section: fixed width or flex-basis with playlist info vertically centered
+- Right section: flex-grow for song list, scrollable if needed
+- Consistent padding and spacing: 24-32px margins
+- Border radius: 12px on containers
+- Gap between sections: 32-48px
+
+Typography:
+- Playlist name: 28-32px, bold, `#ffffff`
+- Playlist author: 16-18px, regular, `#b3b3b3`
+- "Tracklist" header: 20-24px, bold, `#ffffff`
+- Song title: 14-16px, bold, `#ffffff`
+- Song artist/album: 13-14px, regular, `#b3b3b3`
+- Track number: 14px, regular, `#888888`
+- Duration: 14px, regular, `#b3b3b3`
+
+**Element naming conventions:**
+
+*Unique to Featured page (new classes):*
+- `.featured-page` — main container for featured page content
+- `.featured-layout` — flexbox/grid container for left-right split
+- `.featured-left` — left section container
+- `.featured-cover` — large cover image
+- `.featured-name` — playlist name
+- `.featured-author` — playlist author
+- `.featured-like-section` — container for heart and count
+- `.featured-heart` — heart button (uses same styling as `.playlist-card-heart`)
+- `.featured-heart--liked` — liked state (uses same styling as `.playlist-card-heart--liked`)
+- `.featured-like-count` — like count number
+- `.featured-right` — right section container
+- `.featured-tracklist-header` — "Tracklist" heading
+- `.featured-tracklist` — song list container (ul/ol)
+- `.featured-track-number` — track number column (new element not in modal)
+
+*Reused from existing modal styles (for consistency):*
+- `.modal-song-item` — individual song row styling (reuse for featured tracks)
+- `.modal-song-cover` — song cover image (60x60px)
+- `.modal-song-info` — container for title/artist/album stack
+- `.modal-song-title` — song title
+- `.modal-song-artist` — artist name
+- `.modal-song-album` — album name
+- `.modal-song-duration` — duration time
+
+**Why reuse modal classes?**
+- Songs display the same information in both contexts
+- Consistent visual appearance across site
+- Write CSS once, use everywhere
+- Easier maintenance (one place to update styling)
+
+**Random selection function (`selectRandomPlaylist(playlists)`):**
+- **Purpose**: Select one random playlist from the playlists array to display
+- **Parameters**: `playlists` array from data.json
+- **Returns**: Single playlist object
+- **Algorithm**:
+  1. Generate random index: `Math.floor(Math.random() * playlists.length)`
+  2. Return `playlists[randomIndex]`
+- **Called**: Once when Featured page loads
+
+**Render featured playlist function (`renderFeaturedPage(playlist)`):**
+- **Purpose**: Populate the Featured page with the selected playlist data
+- **Parameters**: Single playlist object
+- **DOM operations**:
+  1. Update cover image: set `.featured-cover` src to `playlist.playlistCoverUrl`
+  2. Update playlist name: set `.featured-name` textContent to `playlist.playlistName`
+  3. Update author: set `.featured-author` textContent to `playlist.playlistAuthor`
+  4. Update like count: set `.featured-like-count` textContent to `playlist.likeCount`
+  5. Set liked state: add/remove `.featured-heart--liked` class based on `playlist.isLiked`
+  6. Clear existing tracklist: set `.featured-tracklist` innerHTML to empty
+  7. Loop through `playlist.songs` array with index:
+     - Create `<li class="modal-song-item">` (reuse modal song styling)
+     - Add track number element: `<span class="featured-track-number">${index + 1}</span>`
+     - Add song cover: `<img class="modal-song-cover" src="${song.cover}">`
+     - Create song info container: `<div class="modal-song-info">`
+       - Add title: `<p class="modal-song-title">${song.title}</p>`
+       - Add artist: `<p class="modal-song-artist">${song.artist}</p>`
+       - Add album: `<p class="modal-song-album">${song.album}</p>`
+     - Add duration: `<span class="modal-song-duration">${song.duration}</span>`
+     - Append to `.featured-tracklist`
+  8. Add event listener to heart button for like toggle
+
+**Navigation:**
+- Use existing header with nav links
+- "All Playlists" link navigates to `index.html`
+- "Featured" link navigates to `featured.html`
+- Active state shows on "Featured" link (`.header-nav-link--active`)
+
+**Page load behavior:**
+- On page load (`featured.html`), `loadFeaturedPlaylist()` function:
+  1. Fetch data from `./data/data.json`
+  2. Call `selectRandomPlaylist(data.playlists)`
+  3. Call `renderFeaturedPage(playlist)` with selected playlist
+- Each page load/refresh selects a NEW random playlist
+
 - Navigation functions
 
 
@@ -211,3 +395,161 @@ const playlists = [
 - Modal song items given lighter background (`#2a2a2a`) with 8px vertical gaps for better visibility and separation.
 - Moved nav links to right side of header using `margin-left: auto` for better visual balance.
 - Reviewed all AI-generated CSS against visual intent and planning.md spec before accepting.
+
+**Milestone 3 — Data Schema and Dynamic Rendering**
+
+- Created complete Data Schema in `planning.md` (lines 3-45) defining:
+  - **Playlist Object** fields: `id`, `playlistName`, `playlistAuthor`, `playlistCoverUrl`, `likeCount`, `isLiked`, `songs` array
+  - **Song Object** fields: `title`, `artist`, `album`, `duration`, `cover`
+  - Data shape with code example showing structure
+- Created `data/data.json` with 8 playlists organized by mood/genre:
+  - Happy Vibes, Sad & Emotional, Workout Motivation, Chill & Relax
+  - Rock Classics, Hip-Hop Essentials, Pop Hits, EDM Bangers
+  - Each playlist has 4 real songs with complete metadata
+  - All data matches schema exactly
+- Wrote function specs before implementation:
+  - `renderPlaylist(playlists)` - loops through playlists array and calls cardCreation for each
+  - `cardCreation(playlist)` - takes playlist object, creates `<article class="playlist-card">`, populates with data, attaches event listeners, returns the element
+  - Spec documented fields used: `playlistName`, `playlistAuthor`, `playlistCoverUrl`, `likeCount`, `isLiked`
+- Implemented dynamic card rendering:
+  - `loadPlaylists()` async function fetches data from `./data/data.json`
+  - `renderPlaylist()` clears container and loops through playlists calling `cardCreation()`
+  - `cardCreation()` creates card with:
+    - Cover image (`playlist.playlistCoverUrl`)
+    - Playlist name in bold (`playlist.playlistName`)
+    - Author in muted text (`playlist.playlistAuthor`)
+    - Heart button and like count (`playlist.likeCount`)
+  - Cards appended to `#playlistCards` container
+- Validated implementation against spec:
+  ✓ Data Schema documented in planning.md with all required fields
+  ✓ data.json matches schema structure exactly (8 playlists, each with 4 songs)
+  ✓ Application loads and parses JSON data on page load
+  ✓ Playlist cards dynamically created from data (not hard-coded)
+  ✓ Each card displays: cover image, name, author, like count
+  ✓ Cards arranged in 4-column grid layout
+  ✓ Function specs written before implementation
+  ✓ Implementation matches spec exactly
+
+**Milestone 4 — Modal functionality**
+
+- Wrote complete function spec before implementation covering:
+  - `openModal(playlist)` function with 8 steps: get element, add class, update cover/name/author, clear songs, loop and create song items, lock scroll
+  - `closeModal()` function with 3 steps: get element, remove class, unlock scroll
+  - Three ways to close: ✕ button click, backdrop click (not content), Esc key press
+  - Song list population with all fields: cover (60x60px), title, artist, album, duration
+- Modal HTML structure in `index.html`:
+  - `.modal-overlay` outer container with `.modal-open` class for showing
+  - `.modal-content` inner container with playlist details
+  - `.modal-close` button, `.modal-cover` image, `.modal-name` and `.modal-author` text
+  - `.modal-song-list` with `.modal-song-item` elements
+- Modal CSS styling:
+  - Overlay: `position: fixed`, covers full viewport, `background-color: rgba(0,0,0,0.6)` with `backdrop-filter: blur(4px)`
+  - Hidden by default with `display: none`, shown with `.modal-open` class setting `display: flex`
+  - Content: centered using flexbox, `background-color: #1a1a1a`, `border-radius: 12px`, `max-width: 600px`
+  - Song items: `background-color: #2a2a2a` with 8px gaps, hover effect to `#333333`
+- Event handling:
+  - Card click listener in `cardCreation()` calls `openModal(playlist)` (lines 170-172)
+  - Close button click listener (line 67)
+  - Backdrop click listener checks `event.target === modalOverlay` to avoid closing on content click (lines 70-74)
+  - Esc key listener checks `event.key === 'Escape'` (lines 77-80)
+- Validated implementation against spec:
+  ✓ Clicking playlist card opens modal with all playlist details
+  ✓ Modal displays: cover image, playlist name, author, complete song list
+  ✓ Each song shows: cover (60x60px), title, artist, album, duration
+  ✓ Modal closes on ✕ button click
+  ✓ Modal closes on backdrop click (not on content click)
+  ✓ Modal closes on Esc key press
+  ✓ Page scroll locks when modal open, unlocks when closed
+  ✓ Modal properly prevents card click when clicking heart (via stopPropagation)
+
+**Milestone 5 — Like toggle functionality**
+
+- Wrote complete function spec before implementation covering both branches:
+  - Previously unliked → liked: increment count, add CSS class, fill heart red
+  - Previously liked → unliked: decrement count, remove CSS class, outline state
+  - Constraint logic using `playlist.isLiked` boolean flag
+  - Event handling with `event.stopPropagation()` to prevent modal opening
+- Implemented `toggleLike(playlist, heartButton, likeCountSpan)` function that:
+  - Checks current `playlist.isLiked` state
+  - Updates data model: toggles `isLiked` boolean and increments/decrements `likeCount`
+  - Updates DOM: adds/removes `.playlist-card-heart--liked` class and updates count display
+- Added CSS styling for liked state: red fill color (`#e74c3c`) with matching stroke
+- Heart button uses Unicode ♥ character with CSS for outline (transparent + stroke) and filled (red) states
+- Event listener attached in `cardCreation()` with `event.stopPropagation()` to prevent modal
+- Validated implementation against spec:
+  ✓ Each playlist card has clickable heart icon (`.playlist-card-heart`)
+  ✓ Clicking heart increments count and fills heart red
+  ✓ Clicking again decrements count and returns to outline
+  ✓ Like count updates immediately on card (`.playlist-card-like-count`)
+  ✓ Modal does not open when clicking heart
+  ✓ State persists in memory during session (in `playlist.isLiked` and `playlist.likeCount`)
+
+**Milestone 6 — Shuffle functionality**
+
+- Wrote complete function spec before implementation covering:
+  - Fisher-Yates shuffle algorithm
+  - Original order preservation (creates copy, doesn't mutate original array)
+  - Multi-shuffle behavior (each click produces new random order)
+  - Event handling (attached in openModal function)
+- Implemented `shuffleSongs(playlist)` function that:
+  - Creates copy using spread operator `[...playlist.songs]`
+  - Shuffles copy with Fisher-Yates algorithm (backward iteration with random swaps)
+  - Re-renders modal song list with shuffled order
+  - Preserves original `playlist.songs` array unchanged
+- Added shuffle button event listener in `openModal()` function
+- Validated implementation against spec:
+  ✓ Shuffle button exists in modal (`.modal-shuffle-btn`)
+  ✓ Button clickable and calls `shuffleSongs(playlist)`
+  ✓ Each click produces different random order
+  ✓ Original order restored when closing/reopening modal
+  ✓ No mutation of source data - `playlist.songs` remains unchanged
+
+**Milestone 7 — Featured Page**
+
+- Wrote complete Featured Page specification in `planning.md` (lines 225-361) covering:
+  - Layout structure: horizontal split with left (playlist info) and right (tracklist) sections
+  - Visual design with existing color scheme (green header, dark theme, red hearts)
+  - Element naming conventions with class reuse strategy (reuse `.modal-song-item` classes)
+  - `selectRandomPlaylist(playlists)` function spec with random index generation
+  - `renderFeaturedPage(playlist)` function spec with 8 DOM operation steps
+  - Navigation between `index.html` and `featured.html` with proper active states
+  - Page load behavior: fetch data → select random → render
+- Created `featured.html` as separate HTML page:
+  - Same header/footer structure as main site
+  - Active state on "Featured" nav link (`.header-nav-link--active`)
+  - Layout structure: `.featured-layout` with `.featured-left` and `.featured-right`
+  - Placeholder content populated by JavaScript on load
+- Implemented `featured.js` with all specified functions:
+  - `selectRandomPlaylist(playlists)` - generates random index, returns playlist
+  - `renderFeaturedPage(playlist)` - populates all elements, creates song list with track numbers
+  - `toggleLike(playlist, heartButton, likeCountSpan)` - same toggle logic as main page
+  - `loadFeaturedPlaylist()` - async fetch, select random, render, with error handling
+- Added CSS styling for Featured page:
+  - `.featured-layout` - flexbox horizontal split with 48px gap
+  - `.featured-left` - fixed 300px width, vertical stack
+  - `.featured-cover` - 300x300px square with shadow
+  - `.featured-heart` - 32px with same stroke styling as card hearts
+  - `.featured-right` - flex-grow container with `#1a1a1a` background
+  - `.featured-tracklist-header` - 24px bold "Tracklist" heading
+  - `.featured-track-number` - track number column (new element, tertiary gray)
+  - **Reuses** `.modal-song-item`, `.modal-song-cover`, `.modal-song-info`, `.modal-song-title`, `.modal-song-artist`, `.modal-song-album`, `.modal-song-duration` for consistency
+- Updated navigation links in both pages:
+  - `index.html`: links to `index.html` and `featured.html`, active on "All Playlists"
+  - `featured.html`: links to `index.html` and `featured.html`, active on "Featured"
+- Fixed footer positioning issue:
+  - Added flexbox to `body` with `min-height: 100vh` and `flex-direction: column`
+  - Main content has `flex: 1` to grow and fill space
+  - Footer has `margin-top: auto` to stick to bottom
+- Validated implementation against spec:
+  ✓ Planning.md includes complete Featured Page section with layout, functions, and navigation specs
+  ✓ Featured page displays random playlist on each load/refresh
+  ✓ Page shows: cover image, playlist name, author, like button with count, complete song list
+  ✓ Song list displays: track numbers (1-4), title, artist, album, duration
+  ✓ Layout matches wireframe: horizontal split, left section with playlist info, right section with tracklist
+  ✓ Uses existing color scheme: green header/footer, dark backgrounds, red hearts, muted text
+  ✓ Navigation works: "All Playlists" → `index.html`, "Featured" → `featured.html`
+  ✓ Active states correct on both pages
+  ✓ Class reuse strategy implemented (modal song classes reused for consistency)
+  ✓ Like functionality works on Featured page
+  ✓ Footer stays at bottom of viewport on both short and long pages
+  ✓ Each page load selects NEW random playlist (no caching)
