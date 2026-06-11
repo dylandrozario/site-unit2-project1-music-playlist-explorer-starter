@@ -181,8 +181,17 @@ function cardCreation(playlist) {
     const playlistCard = document.createElement("article");
     playlistCard.classList.add("playlist-card");
     playlistCard.innerHTML = `
-        <button class="playlist-card-delete" aria-label="Delete playlist">🗑</button>
-        <button class="playlist-card-edit" aria-label="Edit playlist">✎</button>
+        <div class="playlist-card-menu">
+            <button class="playlist-card-menu-btn" aria-label="Options">⋮</button>
+            <div class="playlist-card-menu-dropdown">
+                <button class="playlist-card-menu-option" data-action="edit">
+                    <span class="menu-icon">✎</span> Edit
+                </button>
+                <button class="playlist-card-menu-option" data-action="delete">
+                    <span class="menu-icon">🗑</span> Delete
+                </button>
+            </div>
+        </div>
         <img src="${playlist.playlistCoverUrl}" alt="${playlist.playlistName}" class="playlist-card-cover">
         <h3 class="playlist-card-name">${playlist.playlistName}</h3>
         <p class="playlist-card-author">${playlist.playlistAuthor}</p>
@@ -193,21 +202,31 @@ function cardCreation(playlist) {
     `;
 
     // Get buttons and elements for event listeners
-    const deleteButton = playlistCard.querySelector('.playlist-card-delete');
-    const editButton = playlistCard.querySelector('.playlist-card-edit');
+    const menuBtn = playlistCard.querySelector('.playlist-card-menu-btn');
+    const menuDropdown = playlistCard.querySelector('.playlist-card-menu-dropdown');
+    const editOption = playlistCard.querySelector('[data-action="edit"]');
+    const deleteOption = playlistCard.querySelector('[data-action="delete"]');
     const heartButton = playlistCard.querySelector('.playlist-card-heart');
     const likeCountSpan = playlistCard.querySelector('.playlist-card-like-count');
 
-    // Add click event listener to delete button
-    deleteButton.addEventListener('click', (event) => {
+    // Toggle menu dropdown
+    menuBtn.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent modal from opening
-        deletePlaylist(playlist);
+        menuDropdown.classList.toggle('show');
     });
 
-    // Add click event listener to edit button
-    editButton.addEventListener('click', (event) => {
+    // Add click event listener to edit option
+    editOption.addEventListener('click', (event) => {
         event.stopPropagation(); // Prevent modal from opening
+        menuDropdown.classList.remove('show'); // Close menu
         openEditModal(playlist);
+    });
+
+    // Add click event listener to delete option
+    deleteOption.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent modal from opening
+        menuDropdown.classList.remove('show'); // Close menu
+        deletePlaylist(playlist);
     });
 
     // Add click event listener to heart button for like toggle
@@ -253,6 +272,19 @@ async function loadPlaylists(){
     }
 }
 
+// AI playlist description constants
+const DESCRIPTION_SYSTEM_PROMPT = `You are a music curator writing playlist descriptions.
+
+Output format: 2-3 sentences, max 60 words, casual conversational tone.
+
+Constraints:
+- Describe the overall mood, vibe, and theme
+- Mention what activities or moments this suits
+- Do not list individual songs or artists
+- Do not use marketing language like "perfect" or "ultimate"`;
+
+const DESCRIPTION_FAILURE_MESSAGE = "Description unavailable — try again in a moment.";
+
 // AI playlist description function
 async function getPlaylistDescription(playlist, forceRegenerate = false) {
     // Check if description is already cached (skip if force regenerate)
@@ -263,33 +295,19 @@ async function getPlaylistDescription(playlist, forceRegenerate = false) {
     // Check if API key exists
     if (typeof API_KEY === 'undefined' || !API_KEY) {
         console.error('API key not found');
-        // Return playlist-specific fallback
-        return `${playlist.playlistName} - A curated collection of songs by ${playlist.playlistAuthor}.`;
+        return DESCRIPTION_FAILURE_MESSAGE;
     }
 
     try {
-        // Construct the prompt
+        // Construct the user message with playlist info
         const songList = playlist.songs
             .map(song => `- ${song.title} by ${song.artist}`)
             .join('\n');
 
-        const prompt = `You are a music curator writing playlist descriptions. Write a 2-3 sentence description for this playlist that captures its mood and vibe.
-
-Playlist: "${playlist.playlistName}"
+        const userMessage = `Playlist: "${playlist.playlistName}"
 Creator: "${playlist.playlistAuthor}"
 Songs:
-${songList}
-
-Guidelines:
-- Describe the overall mood, vibe, and theme
-- Mention what activities or moments this suits
-- Don't list individual songs or artists
-- Use casual, conversational tone
-- Keep it to 2-3 sentences (40-80 words)`;
-
-        // Make API call with timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+${songList}`;
 
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
@@ -300,62 +318,42 @@ Guidelines:
                 'X-Title': 'Music Playlist Explorer'
             },
             body: JSON.stringify({
-                model: 'google/gemma-4-26b-a4b-it:free',
-                messages: [{
-                    role: 'user',
-                    content: prompt
-                }],
-                max_tokens: 150
-            }),
-            signal: controller.signal
+                model: 'openai/gpt-oss-120b:free',
+                max_tokens: 80,
+                temperature: 0.7,
+                reasoning: {
+                    exclude: true
+                },
+                messages: [
+                    { role: 'system', content: DESCRIPTION_SYSTEM_PROMPT },
+                    { role: 'user', content: userMessage }
+                ]
+            })
         });
 
-        clearTimeout(timeoutId);
-
-        // Handle rate limiting
-        if (response.status === 429) {
-            console.warn('API rate limit exceeded - free tier has request limits');
-            return `${playlist.playlistName} curated by ${playlist.playlistAuthor}. Rate limit reached - please try again in a moment.`;
-        }
-
-        // Handle other error status codes
         if (!response.ok) {
-            const errorText = await response.text();
-            console.error(`API error: ${response.status}`, errorText);
-            // Return playlist-specific fallback
-            return `Experience the vibe of ${playlist.playlistName}. Perfect for any moment when you need the right soundtrack.`;
+            // Log rate limit errors for debugging
+            if (response.status === 429) {
+                console.warn('Rate limit exceeded - please wait before generating more descriptions');
+            }
+            return DESCRIPTION_FAILURE_MESSAGE;
         }
 
         const data = await response.json();
-        console.log('API Response:', data);
 
-        // Extract description from response
-        const description = data.choices?.[0]?.message?.content?.trim();
+        // Safely extract description with optional chaining
+        const description = data?.choices?.[0]?.message?.content?.trim() || DESCRIPTION_FAILURE_MESSAGE;
 
-        // Validate description
-        if (!description || description.length === 0) {
-            console.warn('Empty description received from API');
-            console.log('Full response data:', JSON.stringify(data, null, 2));
-            // Return playlist-specific fallback
-            return `Discover ${playlist.playlistName} curated by ${playlist.playlistAuthor}. A handpicked selection of tracks for your listening pleasure.`;
+        // Cache the description if it's not the failure message
+        if (description !== DESCRIPTION_FAILURE_MESSAGE) {
+            playlist.aiDescription = description;
         }
-
-        // Cache the description
-        playlist.aiDescription = description;
-        console.log(`✓ Generated description for "${playlist.playlistName}":`, description);
 
         return description;
 
     } catch (error) {
-        // Handle different error types
-        if (error.name === 'AbortError') {
-            console.error('API request timeout');
-            return `${playlist.playlistName} brings together the perfect mix of tracks. Enjoy the curated experience.`;
-        }
-
-        console.error('Error getting playlist description:', error);
-        // Return playlist-specific fallback
-        return `Explore ${playlist.playlistName} by ${playlist.playlistAuthor}. Each track carefully selected to create the perfect atmosphere.`;
+        console.error('getPlaylistDescription failed:', error);
+        return DESCRIPTION_FAILURE_MESSAGE;
     }
 }
 
@@ -461,7 +459,7 @@ function createNewPlaylist(event) {
     event.preventDefault();
 
     // Clear previous errors
-    document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+    document.querySelectorAll('#createPlaylistModal .error-message').forEach(el => el.textContent = '');
 
     // Get form data
     const playlistName = document.querySelector('#playlistNameInput').value.trim();
@@ -478,8 +476,8 @@ function createNewPlaylist(event) {
         return;
     }
 
-    // Collect songs
-    const songEntries = document.querySelectorAll('.song-entry');
+    // Collect songs ONLY from the create modal
+    const songEntries = document.querySelectorAll('#songInputsContainer .song-entry');
     const songs = [];
 
     for (let i = 0; i < songEntries.length; i++) {
@@ -805,10 +803,18 @@ function sortPlaylists(playlists, method) {
 
 // Search functionality
 const searchInput = document.querySelector('.header-search');
+const searchClearBtn = document.querySelector('.search-clear-btn');
 
 function searchPlaylists(query) {
     // Convert query to lowercase for case-insensitive search
     const searchQuery = query.toLowerCase().trim();
+
+    // Show/hide clear button based on whether there's text
+    if (searchQuery !== '') {
+        searchClearBtn.classList.add('show');
+    } else {
+        searchClearBtn.classList.remove('show');
+    }
 
     // Start with all playlists
     let playlistsToDisplay = allPlaylists;
@@ -834,11 +840,27 @@ searchInput.addEventListener('input', (event) => {
     searchPlaylists(event.target.value);
 });
 
+// Add event listener for clear button
+searchClearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchClearBtn.classList.remove('show');
+    searchPlaylists('');
+});
+
 // Add event listener for sort dropdown
 sortSelect.addEventListener('change', (event) => {
     currentSortMethod = event.target.value;
     // Re-apply search with new sort method
     searchPlaylists(searchInput.value);
+});
+
+// Close all menu dropdowns when clicking outside
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.playlist-card-menu')) {
+        document.querySelectorAll('.playlist-card-menu-dropdown.show').forEach(dropdown => {
+            dropdown.classList.remove('show');
+        });
+    }
 });
 
 loadPlaylists();

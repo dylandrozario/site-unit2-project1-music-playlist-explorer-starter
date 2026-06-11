@@ -22,7 +22,10 @@
                 <a href="featured.html" class="header-nav-link">Featured</a>
             </nav>
 
-            <input type="search" class="header-search" placeholder="Search playlists..." aria-label="Search playlists">
+            <div class="search-container">
+                <input type="search" class="header-search" placeholder="Search playlists..." aria-label="Search playlists">
+                <button class="search-clear-btn" aria-label="Clear search">×</button>
+            </div>
         </div>
     </header>
 
@@ -72,33 +75,7 @@
             </div>
 
             <ul class="modal-song-list">
-                <li class="modal-song-item">
-                    <img src="" alt="Song cover" class="modal-song-cover">
-                    <div class="modal-song-info">
-                        <p class="modal-song-title">Song Title</p>
-                        <p class="modal-song-artist">Artist Name</p>
-                        <p class="modal-song-album">Album Name</p>
-                    </div>
-                    <span class="modal-song-duration">3:45</span>
-                </li>
-                <li class="modal-song-item">
-                    <img src="./assets/song-cover.jpg" alt="Song cover" class="modal-song-cover">
-                    <div class="modal-song-info">
-                        <p class="modal-song-title">Another Song</p>
-                        <p class="modal-song-artist">Artist Name</p>
-                        <p class="modal-song-album">Album Name</p>
-                    </div>
-                    <span class="modal-song-duration">4:12</span>
-                </li>
-                <li class="modal-song-item">
-                    <img src="https://picsum.photos/60/60?random=12" alt="Song cover" class="modal-song-cover">
-                    <div class="modal-song-info">
-                        <p class="modal-song-title">Third Track</p>
-                        <p class="modal-song-artist">Artist Name</p>
-                        <p class="modal-song-album">Album Name</p>
-                    </div>
-                    <span class="modal-song-duration">2:58</span>
-                </li>
+                <!-- Songs will be dynamically populated here -->
             </ul>
         </div>
     </div>
