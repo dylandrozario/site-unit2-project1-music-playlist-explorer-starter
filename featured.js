@@ -13,11 +13,6 @@ const DESCRIPTION_FAILURE_MESSAGE = "Description unavailable — try again in a 
 
 // AI playlist description function (same as in script.js)
 async function getPlaylistDescription(playlist) {
-    // Check if description is already cached
-    if (playlist.aiDescription && playlist.aiDescription.length > 0) {
-        return playlist.aiDescription;
-    }
-
     // Check if API key exists
     if (typeof API_KEY === 'undefined' || !API_KEY) {
         console.error('API key not found');
@@ -25,7 +20,7 @@ async function getPlaylistDescription(playlist) {
     }
 
     try {
-        // Construct the user message with playlist info
+        // Construct the user message with THIS PLAYLIST'S data only
         const songList = playlist.songs
             .map(song => `- ${song.title} by ${song.artist}`)
             .join('\n');
@@ -67,13 +62,8 @@ ${songList}`;
 
         const data = await response.json();
 
-        // Safely extract description with optional chaining
+        // Safely extract description with optional chaining - NO CACHING
         const description = data?.choices?.[0]?.message?.content?.trim() || DESCRIPTION_FAILURE_MESSAGE;
-
-        // Cache the description if it's not the failure message
-        if (description !== DESCRIPTION_FAILURE_MESSAGE) {
-            playlist.aiDescription = description;
-        }
 
         return description;
 

@@ -55,31 +55,20 @@ function openModal(playlist) {
     const aiDescriptionBtn = document.querySelector('.modal-ai-description-btn');
     const aiDescriptionText = document.querySelector('.modal-ai-description-text');
 
-    // Reset description state
+    // Reset description state - clear every time modal opens
     aiDescriptionText.textContent = '';
     aiDescriptionText.style.display = 'none';
-
-    // Check if already has description
-    if (playlist.aiDescription) {
-        aiDescriptionBtn.textContent = 'Regenerate Description';
-        aiDescriptionText.style.display = 'block';
-        aiDescriptionText.textContent = playlist.aiDescription;
-    } else {
-        aiDescriptionBtn.textContent = 'Generate AI Description';
-    }
-
+    aiDescriptionBtn.textContent = 'Generate AI Description';
     aiDescriptionBtn.disabled = false;
 
     aiDescriptionBtn.onclick = async () => {
-        const isRegenerating = aiDescriptionBtn.textContent === 'Regenerate Description';
-
         aiDescriptionBtn.disabled = true;
         aiDescriptionBtn.textContent = 'Loading...';
         aiDescriptionText.style.display = 'block';
         aiDescriptionText.textContent = 'Generating description...';
 
-        // If regenerating, clear cache and force new generation
-        const description = await getPlaylistDescription(playlist, isRegenerating);
+        // Get fresh description for THIS playlist only
+        const description = await getPlaylistDescription(playlist);
         aiDescriptionText.textContent = description;
         aiDescriptionBtn.textContent = 'Regenerate Description';
         aiDescriptionBtn.disabled = false;
@@ -286,12 +275,7 @@ Constraints:
 const DESCRIPTION_FAILURE_MESSAGE = "Description unavailable — try again in a moment.";
 
 // AI playlist description function
-async function getPlaylistDescription(playlist, forceRegenerate = false) {
-    // Check if description is already cached (skip if force regenerate)
-    if (!forceRegenerate && playlist.aiDescription && playlist.aiDescription.length > 0) {
-        return playlist.aiDescription;
-    }
-
+async function getPlaylistDescription(playlist) {
     // Check if API key exists
     if (typeof API_KEY === 'undefined' || !API_KEY) {
         console.error('API key not found');
@@ -299,7 +283,7 @@ async function getPlaylistDescription(playlist, forceRegenerate = false) {
     }
 
     try {
-        // Construct the user message with playlist info
+        // Construct the user message with THIS PLAYLIST'S data only
         const songList = playlist.songs
             .map(song => `- ${song.title} by ${song.artist}`)
             .join('\n');
@@ -341,13 +325,8 @@ ${songList}`;
 
         const data = await response.json();
 
-        // Safely extract description with optional chaining
+        // Safely extract description with optional chaining - NO CACHING
         const description = data?.choices?.[0]?.message?.content?.trim() || DESCRIPTION_FAILURE_MESSAGE;
-
-        // Cache the description if it's not the failure message
-        if (description !== DESCRIPTION_FAILURE_MESSAGE) {
-            playlist.aiDescription = description;
-        }
 
         return description;
 
